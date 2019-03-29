@@ -6,10 +6,10 @@ const defaultState = {
 
 export default (state = defaultState, action = {}) => {
     switch (action.type) {
-        case action.START_HOTWIND:
+        case 'START_HOTWIND':
             return {
                 ...state,
-                testInstruct: action.testInstruct
+                starHotwind: action.testInstruct
             }
         default:
             return state
