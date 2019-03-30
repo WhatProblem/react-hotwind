@@ -1,16 +1,9 @@
 import React, { lazy } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { connect } from "react-redux"
-import { startHotwind } from "../store/action"
-import store from '../store'
 
-class RouteWithSubRoutes extends React.Component {
+export default class RouteWithSubRoutes extends React.Component {
     componentDidMount() {
-        // console.log(this.props)
-        // this.props.startHotwind('测试dispatch11111111111111111111111')
-        // console.log(store.getState())
-        this.props.startHotwind(this.props.location.pathname)
-        console.log(store.getState())
+
     }
     render() {
         const route = this.props
@@ -22,31 +15,18 @@ class RouteWithSubRoutes extends React.Component {
                     path={route.path}
                     render={props => {
                         if (loginKey && route.path == '/login') {
-                            return
+                            return <Redirect to="/" />
                         }
                         if (!loginKey && route.path != '/login') {
                             return <Redirect to="/login" />
                         }
                         if (route.path == '/') {
-                            return <Redirect to="/main" />
+                            return <Redirect to="/main/home" />
                         }
-                        return <route.component {...props} routes={route.routes} />
+                        return <route.component {...props} route={route} routes={route.routes} />
                     }}
                 />
             </div>
         )
     }
 }
-
-const mapStateToProps = state => ({
-    // todos: '测试state添加'
-    todos: state
-})
-
-const mapDispatchToProps = dispatch => ({
-    startHotwind: text => dispatch(startHotwind(text))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(RouteWithSubRoutes)
-
-// export default RouteWithSubRoutes

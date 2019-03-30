@@ -11,28 +11,40 @@ const routes = [
         path: '/',
         exact: true,
         component: Main,
+        name: '首页',
+        meta: 'main'
     },
     {
         path: '/main',
         component: Main,
+        name: '首页',
+        meta: 'main',
         routes: [
             {
                 path: "/main/home",
-                component: Home
+                component: Home,
+                name: '首页',
+                meta: 'home'
             },
             {
                 path: "/main/addgoods",
-                component: AddGoods
+                component: AddGoods,
+                name: '新增商品',
+                meta: 'addgoods'
             }
         ]
     },
     {
         path: '/login',
-        component: Login
+        component: Login,
+        name: '登陆',
+        meta: 'login'
     },
     {
         path: '/404',
-        component: NotFound
+        component: NotFound,
+        name: '未找到404',
+        meta: '404'
     }
 ]
 

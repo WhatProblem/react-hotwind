@@ -1,11 +1,23 @@
 import React, { lazy } from 'react'
 import { Link, Route, Switch, Redirect } from "react-router-dom";
+import { connect } from "react-redux"
+import { addRoute } from "../store/action";
+import store from '../store'
+import RouteWithSubRoutes from '../Routes/RouteWithSubRoutes'
 const NotFound = lazy(() => import('./NotFound'))
-const Home = lazy(() => import('./Home'))
 
-export default class Main extends React.Component {
+class Main extends React.Component {
+    componentWillReceiveProps() {
+        console.log(this.props)
+        const { location, routes } = this.props
+        this.props.addRoute(location.pathname);
+        console.log(store.getState().tagViews);
+    }
+    componentDidMount() {
+        // console.log(456)
+    }
+
     render() {
-        // console.log(this.props)
         const { location, routes } = this.props
         return (
             <div>
@@ -14,13 +26,7 @@ export default class Main extends React.Component {
                 <Switch>
                     {
                         routes.map((route, i) => {
-                            if (location.pathname == '/main') {
-                                return <Redirect key={i} to="/main/home" />
-                            } else if (route.path == location.pathname) {
-                                return <Route key={i} path={route.path} component={route.component} />
-                            } else {
-                                return null
-                            }
+                            return <RouteWithSubRoutes key={i} {...route} />
                         })
                     }
                     <Route component={NotFound} />
@@ -29,3 +35,13 @@ export default class Main extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    tagViews: state.tagViews
+})
+
+const mapDispatchToProps = dispatch => ({
+    addRoute: routeStatus => dispatch(addRoute(routeStatus))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
