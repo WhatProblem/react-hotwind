@@ -1,10 +1,10 @@
 import { lazy } from 'react'
 import { Redirect } from 'react-router-dom'
-const Home = lazy(() => import('../view/Home'))
-const AddGoods = lazy(() => import('../view/AddGoods'))
-const Main = lazy(() => import('../view/Main'))
-const NotFound = lazy(() => import('../view/NotFound'))
-const Login = lazy(() => import('../view/Login'))
+const Home = lazy(() => import('../view/home/Home'))
+const AddGoods = lazy(() => import('../view/addgoods/AddGoods'))
+const Main = lazy(() => import('../view/main/Main'))
+const NotFound = lazy(() => import('../view/notfound/NotFound'))
+const Login = lazy(() => import('../view/login/Login'))
 
 const routes = [
     {
