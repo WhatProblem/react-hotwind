@@ -5,6 +5,7 @@ const AddGoods = lazy(() => import('../view/addgoods/AddGoods'))
 const Main = lazy(() => import('../view/main/Main'))
 const NotFound = lazy(() => import('../view/notfound/NotFound'))
 const Login = lazy(() => import('../view/login/Login'))
+const DoGoods = lazy(() => import('../view/dogoods/DoGoods'))
 
 const routes = [
     {
@@ -24,13 +25,24 @@ const routes = [
                 path: "/main/home",
                 component: Home,
                 name: '首页',
-                meta: 'home'
+                meta: 'home',
+                icon: 'h-home',
+                routes: [
+                    {
+                        path: '/main/home/dogoods',
+                        component: DoGoods,
+                        name: '商品操作',
+                        meta: 'dogoods',
+                        icon: 'h-edit_goods'
+                    }
+                ]
             },
             {
                 path: "/main/addgoods",
                 component: AddGoods,
                 name: '新增商品',
-                meta: 'addgoods'
+                meta: 'addgoods',
+                icon: 'h-add_goods'
             }
         ]
     },

@@ -1,12 +1,12 @@
 // 公共样式
 
 /*颜色*/
-$sidebarBg: rgb(48, 65, 86) !default;                // 左侧导航栏背景色
-$sidebarColor: rgb(191, 203, 217) !default;          // 左侧导航栏文字颜色
-$sidebarActive: rgb(64, 158, 255) !default;          // 左侧导航栏激活状态文字颜色0
-$sidebarBgHover: #263445 !default;                   // 左侧导航栏悬浮状态背景色
-
+$sidebarBg: rgb(48, 65, 86) !default; // 左侧导航栏背景色
+$sidebarColor: rgb(191, 203, 217) !default; // 左侧导航栏文字颜色
+$sidebarActive: rgb(64, 158, 255) !default; // 左侧导航栏激活状态文字颜色0
+$sidebarBgHover: #263445 !default; // 左侧导航栏悬浮状态背景色
+$sidebarItemBg: #1f2d3d !default; // 左侧导航字列表背景色
 
 
 /*左侧导航文字大小*/
-$sidebarFont: 14px !default;                           // 左侧导航文字大小
+$sidebarFont: 14px !default; // 左侧导航文字大小
