@@ -5,15 +5,16 @@ import { addRoute } from "../../store/action";
 import store from '../../store'
 import RouteWithSubRoutes from '../../Routes/RouteWithSubRoutes'
 import Sidebar from '../../components/sidebar/Sidebar'
+import Navbar from '../../components/navbar/Navbar'
 import './main.scss'
 const NotFound = lazy(() => import('../notfound/NotFound'))
 
 class Main extends React.Component {
     componentWillReceiveProps() {
-        console.log(this.props)
+        // console.log(this.props)
         const { location, routes } = this.props
         this.props.addRoute(location.pathname);
-        console.log(store.getState().tagViews);
+        // console.log(store.getState().tagViews);
     }
     componentDidMount() {
         // console.log(456)
@@ -26,17 +27,18 @@ class Main extends React.Component {
                 <div className="sidebar">
                     <Sidebar></Sidebar>
                 </div>
-                {/* <Link to="/main/home">home</Link>
-                <Link to="/main/addgoods">addgoods</Link> */}
                 <div className="content">
-                    <Switch>
-                        {
-                            routes.map((route, i) => {
-                                return <RouteWithSubRoutes key={i} {...route} />
-                            })
-                        }
-                        <Route component={NotFound} />
-                    </Switch>
+                    <Navbar className="navbar" />
+                    <div className="containers">
+                        <Switch>
+                            {
+                                routes.map((route, i) => {
+                                    return <RouteWithSubRoutes key={i} {...route} />
+                                })
+                            }
+                            <Route component={NotFound} />
+                        </Switch>
+                    </div>
                 </div>
             </div>
         )

@@ -12,15 +12,15 @@ export default class SubItem extends React.Component {
     }
 
     switchShow = (args, e) => {
-        console.log(args)
-        console.log(e)
+        // console.log(args)
+        // console.log(e)
         this.setState({
             showMenuItem: !this.state.showMenuItem,
             curMeta: args
         })
     }
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         const { name, routes, meta, icon } = this.props;
         return (
             <div className="subItem">

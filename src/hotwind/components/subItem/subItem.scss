@@ -50,6 +50,12 @@
             padding: 0 40px;
             box-sizing: border-box;
             background: $sidebarItemBg;
+            transition: background 0.3s;
+
+            &:hover {
+                cursor: pointer;
+                background: $sidebarBgHoverChild;
+            }
         }
     }
 
