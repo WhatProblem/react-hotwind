@@ -1,0 +1,7 @@
+{
+    "test": {
+        "wsUrl": "/get",
+        "param": "无",
+        "content": "测试获取数据"
+    }
+}

@@ -5,3 +5,32 @@
 .r-hotwind {
     padding-right: 10px;
 }
+
+
+/* 使用webkit内核的浏览器 */
+
+input::-webkit-input-placeholder {
+    font-size: $inputPlaceholder;
+    color: $inputPlaceholderColor;
+}
+
+/* Firefox版本4-18 */
+
+input::-moz-placeholder {
+    font-size: $inputPlaceholder;
+    color: $inputPlaceholderColor;
+}
+
+/* Firefox版本19+ */
+
+input::-moz-placeholder {
+    font-size: $inputPlaceholder;
+    color: $inputPlaceholderColor;
+}
+
+/* IE浏览器 */
+
+input:-ms-input-placeholder {
+    font-size: $inputPlaceholder;
+    color: $inputPlaceholderColor;
+}

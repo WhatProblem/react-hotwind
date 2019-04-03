@@ -1,13 +1,22 @@
 // 公共样式
-
 /*颜色*/
+
 $sidebarBg: rgb(48, 65, 86) !default; // 左侧导航栏背景色
 $sidebarColor: rgb(191, 203, 217) !default; // 左侧导航栏文字颜色
 $sidebarActive: rgb(64, 158, 255) !default; // 左侧导航栏激活状态文字颜色0
 $sidebarBgHover: #263445 !default; // 左侧导航栏一级菜单悬浮状态背景色
-$sidebarBgHoverChild: #001528 !default; //  左侧导航栏子级菜单悬浮状态背景色
+$sidebarBgHoverChild: #001528 !default; // 左侧导航栏子级菜单悬浮状态背景色
 $sidebarItemBg: #1f2d3d !default; // 左侧导航字列表背景色
-
+$inputBorderColor: #dcdfe6 !default; // 表单边界颜色
+$inputHoverColor: rgb(180, 220, 223) !default; // 表单悬浮边框颜色
+$inputColor: #606266 !default; // input输入框文字颜色
+$inputPlaceholderColor: #c0c4cc !default; // input框placeholder文字颜色
+$selectOptionsBorder: #e4e7ed !default; // select悬浮框边界颜色
+$selectOptionsBg: #fff !default; // select悬浮框背景色
+$selectOptionBg: #f5f7fa !default; // select子选项悬浮框背景色
 
 /*左侧导航文字大小*/
+
 $sidebarFont: 14px !default; // 左侧导航文字大小
+$inputFont: 14px !default; // 输入框文字大小
+$inputPlaceholder: 14px !default; // 输入框placeholder文字颜色

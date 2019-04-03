@@ -67,28 +67,28 @@ const routes = [
             {
                 path: "/main/docs",
                 component: Docs,
-                name: '文档',
+                name: '开发文档',
                 meta: 'docs',
                 icon: 'h-docs',
             },
             {
                 path: "/main/excel",
                 component: Excel,
-                name: 'excel',
+                name: 'excel导出',
                 meta: 'excel',
                 icon: 'h-excel',
             },
             {
                 path: "/main/shareLink",
                 component: ShareLink,
-                name: '数据分析',
+                name: '外链分享',
                 meta: 'shareLink',
                 icon: 'h-share_link',
             },
             {
                 path: "/main/userList",
                 component: UserList,
-                name: '数据分析',
+                name: '用户管理',
                 meta: 'userList',
                 icon: 'h-user_list',
             }
