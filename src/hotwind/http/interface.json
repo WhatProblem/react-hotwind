@@ -3,5 +3,10 @@
         "wsUrl": "/get",
         "param": "无",
         "content": "测试获取数据"
+    },
+    "goodsConfig": {
+        "wsUrl": "/goodsConfig",
+        "param": "无",
+        "content": "获取商品静态配置数据"
     }
 }

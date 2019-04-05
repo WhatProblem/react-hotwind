@@ -1,0 +1,22 @@
+@import '../../../styles/common.scss';
+
+.input {
+    position: relative;
+
+    .myInput {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 15px;
+        border: 1px solid $inputBorderColor;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: $inputFont;
+        color: $inputColor;
+        transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+        &:hover {
+            border-color: $inputHoverColor;
+            cursor: pointer;
+        }
+    }
+}

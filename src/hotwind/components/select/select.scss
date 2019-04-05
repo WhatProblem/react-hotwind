@@ -31,7 +31,7 @@
     .arrow {
         position: absolute;
         right: 0;
-        top: 50%;
+        top: 35%;
         z-index: -1;
         color: $inputPlaceholderColor;
         font-size: 12px;
@@ -54,6 +54,7 @@
         position: absolute;
         left: 0;
         top: 45px;
+        z-index: 999;
         display: block;
         padding: 5px 0;
         border: 1px solid $selectOptionsBorder;
