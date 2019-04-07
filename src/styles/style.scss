@@ -43,3 +43,9 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+input[type="hidden"i],
+input[type="image"i],
+input[type="file"i] {
+    opacity: 0;
+}

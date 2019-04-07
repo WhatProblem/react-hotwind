@@ -2,4 +2,20 @@
 
 .addGoods {
     width: 100%;
+
+    .select,
+    .input,
+    .inputFile {
+        float: left;
+        margin: 10px 20px;
+    }
+
+    button {
+        clear: both;
+        display: block;
+
+        &::before {
+            content: "";
+        }
+    }
 }
