@@ -8,5 +8,8 @@
         "wsUrl": "/goodsConfig",
         "param": "无",
         "content": "获取商品静态配置数据"
+    },
+    "upload": {
+        "wsUrl": "/upload"
     }
 }
