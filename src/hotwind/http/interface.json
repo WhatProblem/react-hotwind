@@ -11,5 +11,8 @@
     },
     "upload": {
         "wsUrl": "/upload"
+    },
+    "testPost": {
+        "wsUrl": "/testPost"
     }
 }

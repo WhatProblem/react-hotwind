@@ -10,7 +10,6 @@ export default class InputFile extends React.Component {
         if (this.props.onChange) {
             let formdata = new FormData()
             formdata.append('file', e.target.files[0])
-            console.log(formdata)
             let obj = { files: formdata, name: e.target.files[0]['name'] }
             this.props.onChange(obj)
         }

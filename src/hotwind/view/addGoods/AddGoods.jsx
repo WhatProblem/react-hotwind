@@ -3,7 +3,6 @@ import Select from '../../components/select/Select'
 import Input from '../../components/input/Input'
 import InputFile from '../../components/inputFile/InputFile'
 import $http from '../../http'
-import axios from 'axios'
 import './addGoods.scss'
 
 export default class AddGoods extends React.Component {
@@ -72,7 +71,6 @@ export default class AddGoods extends React.Component {
         }
     }
     change = (inputState, value) => {
-        console.log(456)
         if (inputState === 'goodsName') {
             this.setState({
                 goodsName: value
@@ -100,16 +98,7 @@ export default class AddGoods extends React.Component {
         }
     }
     submit = () => {
-        console.log(this.state.inputFile.files)
-        // $http.post('upload',this.state.inputFile.files).then((res)=>{
-        //     console.log(res)
-        // })
-        let config = {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        };
-        axios.post('http://www.wslifestyle.com/upload', this.state.inputFile.files, config).then(function (res) {
+        $http.post('upload',this.state.inputFile.files).then((res)=>{
             console.log(res)
         })
     }

@@ -8,10 +8,10 @@ import qs from 'qs'
 const devUrl = 'http://127.0.0.1:80'
 const proUrl = 'http://www.wslifestyle.com'
 const onLineUrl = 'http://whatproblem.xg1haodfed.zhihuanche.cn'
-axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+// axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-    config.data = JSON.stringify(config.data);
+    // config.data = JSON.stringify(config.data);
     config.headers.Authorization = '';
     // console.log('请求之前配置:',config);
     return config;
@@ -36,8 +36,8 @@ function api(methods, url, param) {
         url: apiUrl,
         method: methods, // 默认是 get
         baseURL: proUrl,
-        params: param,
-        data: param,
+        params: (methods === 'get' || methods === 'delete') ? param : null,
+        data: (methods === 'post' || methods === 'put') ? param : null,
         timeout: 150000, // 请求超时
         withCredentials: false, // 默认的
         responseType: 'json', // 默认的
