@@ -97,9 +97,37 @@ export default class AddGoods extends React.Component {
             })
         }
     }
+
+    /**
+     * Note: 新增表单数据
+     * @type_id {Number 性别，0：女}
+     * @category_type {Number 商品类型，0-8}
+     * @goods_name {String 商品名称}
+     * @goods_price {Float 商品价格}
+     * @goods_color {String 商品颜色}
+     * @goods_discount {Float 折扣金额}
+     * @onsale_info {Number 促销类型}
+     * @isnew {Number 是否新品}
+     * @sale_type {Number 活动类型标识}
+     */
     submit = () => {
-        $http.post('upload',this.state.inputFile.files).then((res)=>{
+        let params = this.state.inputFile.files
+        let param = {
+            type_id: this.state.sexOption.type_id,
+            category_type: this.state.categoryOption.category_type,
+            goods_name: this.state.goodsName,
+            goods_price: this.state.goodsPrice,
+            goods_color: this.state.goodsColor,
+            goods_discount: this.state.goodsDiscount,
+            onsale_info: this.state.saleInfo.onsale_info,
+            onsale_infoVal: this.state.saleInfoVal,
+            isnew: this.state.isNewOption.isnew,
+            sale_type: this.state.onsaleFlag.sale_type,
+        }
+        params.append('param', JSON.stringify(param))
+        $http.post('upload', params).then((res) => {
             console.log(res)
+            params.delete('param')
         })
     }
 
