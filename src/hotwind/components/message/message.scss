@@ -1,0 +1,41 @@
+.message {
+    width: 360px;
+    height: 45px;
+    position: fixed;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(247, 211, 164);
+    color: rgb(248, 140, 17);
+    z-index: 999999;
+    border-radius: 4px;
+    line-height: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    // animation: name duration timing-function delay iteration-count direction fill-mode;
+    // animation: showTips 5s ease-out 0 1 forwards;
+    animation: showTips 1.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showTips {
+    0% {
+        top: -45px;
+    }
+
+    20% {
+        top: 30px;
+    }
+
+    80% {
+        top: 30px;
+    }
+
+    100% {
+        top: -45px;
+    }
+}

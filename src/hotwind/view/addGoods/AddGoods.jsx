@@ -2,6 +2,7 @@ import React from 'react'
 import Select from '../../components/select/Select'
 import Input from '../../components/input/Input'
 import InputFile from '../../components/inputFile/InputFile'
+import Message from '../../components/message/Message'
 import $http from '../../http'
 import './addGoods.scss'
 
@@ -9,6 +10,7 @@ export default class AddGoods extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            showTips: false, // 显示提示语
             resConfig: null, // 返回配置数据
             goodsOption: [], // 商品类型
             sexOption: {}, // 性别
@@ -24,6 +26,7 @@ export default class AddGoods extends React.Component {
             isNewOption: {}, // 是否是新品
             onsaleFlag: {}, // 活动标识
             inputFile: '', // 输入文件
+            tips: '', // 错误提示
         }
     }
     select = (optionState, opt) => {
@@ -99,17 +102,17 @@ export default class AddGoods extends React.Component {
     }
 
     /**
-     * Note: 新增表单数据
-     * @type_id {Number 性别，0：女}
-     * @category_type {Number 商品类型，0-8}
-     * @goods_name {String 商品名称}
-     * @goods_price {Float 商品价格}
-     * @goods_color {String 商品颜色}
-     * @goods_discount {Float 折扣金额}
-     * @onsale_info {Number 促销类型}
-     * @isnew {Number 是否新品}
-     * @sale_type {Number 活动类型标识}
-     */
+    * Note: 新增表单数据
+    * @type_id {Number 性别，0：女}
+    * @category_type {Number 商品类型，0-8}
+    * @goods_name {String 商品名称}
+    * @goods_price {Float 商品价格}
+    * @goods_color {String 商品颜色}
+    * @goods_discount {Float 折扣金额}
+    * @onsale_info {Number 促销类型}
+    * @isnew {Number 是否新品}
+    * @sale_type {Number 活动类型标识}
+    */
     submit = () => {
         let params = this.state.inputFile.files
         let param = {
@@ -124,16 +127,77 @@ export default class AddGoods extends React.Component {
             isnew: this.state.isNewOption.isnew,
             sale_type: this.state.onsaleFlag.sale_type,
         }
+        if (JSON.stringify(this.state.sexOption) === '{}') {
+            this.showMessage({
+                tips: '这是警告提示'
+            })
+            return
+        } else if (JSON.stringify(this.state.categoryOption) === '{}') {
+            return
+        } else if (!this.state.goodsName) {
+            return
+        } else if (!this.state.goodsPrice) {
+            return
+        } else if (!this.state.goodsColor) {
+            return
+        } else if (this.state.goodsDiscount === '') {
+            return
+        } else if (JSON.stringify(this.state.saleInfo) === '{}') {
+            return
+        } else if (JSON.stringify(this.state.isNewOption) === '{}') {
+            return
+        } else if (JSON.stringify(this.state.onsaleFlag) === '{}') {
+            return
+        } else if (!this.state.inputFile) {
+            return
+        }
         params.append('param', JSON.stringify(param))
-        $http.post('upload', params).then((res) => {
-            console.log(res)
+        $http.post('addGoods', params).then((res) => {
             params.delete('param')
+            this.resetForm()
+        })
+    }
+    /**
+     * 重置表单
+     */
+    resetForm = () => {
+        this.setState({
+            goodsOption: [], // 商品类型
+            sexOption: {}, // 性别
+            categoryOption: {}, // 选择商品类型
+            goodsName: '', // 商品名称
+            goodsPrice: '', // 商品价格
+            goodsColor: '', // 商品颜色
+            goodsDiscount: '', // 商品折扣
+            saleInfo: {}, // 促销类型
+            saleInfoName: '', // 促销类型名称--placeholder部分
+            saleInfoVal: '', // 促销类型名称
+            inputPermit: false, // 不允许输入促销类型名称
+            isNewOption: {}, // 是否是新品
+            onsaleFlag: {}, // 活动标识
+            inputFile: '', // 输入文件
+        })
+    }
+
+    /**
+     * 显示提示
+     */
+    showMessage = (msg) => {
+        this.setState({
+            showTips: true,
+            tips: msg.tips
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    showTips: false
+                })
+            }, 1500);
         })
     }
 
     delFile = () => {
         this.setState({
-            inputFile: {}
+            inputFile: ''
         })
     }
 
@@ -160,7 +224,11 @@ export default class AddGoods extends React.Component {
                 <Select options={this.state.resConfig.new_product} width={240} name={'name'} placeholder={'请选择是否是新品'} onClick={this.select.bind(this, 'isNewOption')} value={this.state.isNewOption.name} />
                 <Select options={this.state.resConfig.sale_ornot} width={240} name={'name'} placeholder={'请选择活动类型标识'} onClick={this.select.bind(this, 'onsaleFlag')} value={this.state.onsaleFlag.name} />
                 <InputFile width={240} placeholder={'请选择上传图片'} accept={'image/jpeg,image/jpg,image/png'} onDelFile={this.delFile.bind(this)} onChange={this.change.bind(this, 'upload')} value={this.state.inputFile} type={'file'} />
-                <button onClick={this.submit.bind(this)}>提交</button>
+                <div className="btn">
+                    <button className="subBtn" onClick={this.submit.bind(this)}>提交</button>
+                    <button className="cancelBtn" onClick={this.resetForm.bind(this)}>重置</button>
+                </div>
+                {this.state.showTips && <Message tips={this.state.tips} />}
             </div>
         )
     }

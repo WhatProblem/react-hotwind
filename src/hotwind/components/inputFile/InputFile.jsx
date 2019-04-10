@@ -7,7 +7,7 @@ export default class InputFile extends React.Component {
         this.inputFile = React.createRef();
     }
     chanageInput = (e) => {
-        if (this.props.onChange) {
+        if (this.props.onChange && e.target.files[0]) {
             let formdata = new FormData()
             formdata.append('file', e.target.files[0])
             let obj = { files: formdata, name: e.target.files[0]['name'] }

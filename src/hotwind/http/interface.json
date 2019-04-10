@@ -9,10 +9,9 @@
         "param": "无",
         "content": "获取商品静态配置数据"
     },
-    "upload": {
-        "wsUrl": "/upload"
-    },
-    "testPost": {
-        "wsUrl": "/testPost"
+    "addGoods": {
+        "wsUrl": "/addGoods",
+        "param": "type_id, category_type, goods_name, goods_price, goods_color, goods_discount, onsale_info, isnew, sale_type",
+        "content": "新增商品"
     }
 }

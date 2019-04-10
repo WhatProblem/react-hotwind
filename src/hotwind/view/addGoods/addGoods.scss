@@ -10,12 +10,54 @@
         margin: 10px 20px;
     }
 
-    button {
+    .btn {
+        width: 260px;
+        height: 40px;
+        margin: auto;
         clear: both;
         display: block;
 
         &::before {
             content: "";
+        }
+
+        .subBtn {
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            color: #fff;
+            background: #409eff;
+            border: 1px solid #409eff;
+            transition: background 0.1s;
+            box-sizing: border-box;
+
+            &:hover {
+                background: #7ebbf8;
+                cursor: pointer;
+            }
+        }
+
+        .cancelBtn {
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            color: #606266;
+            background: #fff;
+            border: 1px solid #dcdfe6;
+            transition: background 0.1s;
+            margin-left: 20px;
+
+            &:hover {
+                background: #bedaf7;
+                cursor: pointer;
+                color: #409eff;
+            }
         }
     }
 }
