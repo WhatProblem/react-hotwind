@@ -13,5 +13,10 @@
         "wsUrl": "/addGoods",
         "param": "type_id, category_type, goods_name, goods_price, goods_color, goods_discount, onsale_info, isnew, sale_type",
         "content": "新增商品"
+    },
+    "getGoods": {
+        "wsUrl": "/getGoods",
+        "param": "pages, offsets, barcode",
+        "content": "商品列表"
     }
 }
