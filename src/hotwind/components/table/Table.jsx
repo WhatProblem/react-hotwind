@@ -31,8 +31,15 @@ export default class Table extends React.Component {
     render() {
         const { columns, data, width = '720', align = 'center', defaultWidth = '120', dosign = true } = this.props
         const datas = this.dealData(columns, data)
+        let wid = 208
+        columns.forEach((item, i) => {
+            if (!item.width) {
+                item.width = defaultWidth
+            }
+            wid += item.width
+        })
         return (
-            <div className="table" >
+            <div className="table" style={{ width: wid + 'px' }}>
                 <div className="tableHeader">
                     <table cellSpacing="0" cellPadding="0" border="0" className="htable">
                         <colgroup>
@@ -74,11 +81,11 @@ export default class Table extends React.Component {
                                     {
                                         Object.keys(items).map((idx, isd) =>
                                             <td className="thtitle" key={idx}>
-                                                <div className="htitle" style={{ textAlign: align }}>{items[idx]}</div>
+                                                <div className="htitle" style={{ textAlign: align }} title={items[idx]}>{items[idx]}</div>
                                             </td>)
                                     }
                                     {dosign && <td className="thtitle">
-                                        <div className="htitle" style={{ textAlign: align }}>
+                                        <div className="htitles">
                                             <button className="edit" onClick={this.edit.bind(this)}>编辑</button>
                                             <button className="delete" onClick={this.del.bind(this)}>删除</button>
                                         </div>

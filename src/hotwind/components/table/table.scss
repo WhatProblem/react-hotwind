@@ -1,12 +1,13 @@
 .table {
     .tableHeader {
+        background: #fff;
+
         .htable {
             border: 1px solid #ebebeb;
             border-bottom: none;
             border-radius: 3px 3px 0 0;
             padding: 24px;
             padding-bottom: 0;
-
             height: 45px;
 
             .thead {
@@ -47,13 +48,13 @@
                     background: #fff;
 
                     &:hover {
-                        background: rgba(247, 244, 244,0.65);
+                        background: rgba(247, 244, 244, 0.65);
                     }
 
                     .thtitle {
                         border-bottom: 1px solid #ebeef5;
 
-                        .htitle {
+                        .htitles {
                             height: 100%;
                             padding: 0 18px;
                             line-height: 45px;
@@ -93,6 +94,17 @@
                                     background-color: #f78a8a;
                                 }
                             }
+                        }
+
+                        .htitle {
+                            width: 100%;
+                            height: 45px;
+                            padding: 0 18px;
+                            line-height: 45px;
+                            box-sizing: border-box;
+                            font-size: 12px;
+                            color: #909399;
+                            overflow: hidden;
                         }
                     }
                 }
