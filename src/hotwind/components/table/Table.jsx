@@ -10,7 +10,7 @@ export default class Table extends React.Component {
             propArr.push(prop)
         })
         data.forEach((item, i) => {
-            let newObj = {}
+            let newObj = item
             propArr.forEach((items, index) => {
                 newObj[items] = item[items]
             })
@@ -18,9 +18,9 @@ export default class Table extends React.Component {
         })
         return resData
     }
-    del = () => {
+    del = (items) => {
         if (this.props.onDel) {
-            this.props.onDel()
+            this.props.onDel(items)
         }
     }
     edit = () => {
@@ -29,9 +29,9 @@ export default class Table extends React.Component {
         }
     }
     render() {
-        const { columns, data, width = '720', align = 'center', defaultWidth = '120', dosign = true } = this.props
+        const { columns, data, width = '720', align = 'center', defaultWidth = '120', showDo = true, showOrder = true } = this.props
         const datas = this.dealData(columns, data)
-        let wid = 208
+        let wid = 288
         columns.forEach((item, i) => {
             if (!item.width) {
                 item.width = defaultWidth
@@ -43,22 +43,26 @@ export default class Table extends React.Component {
                 <div className="tableHeader">
                     <table cellSpacing="0" cellPadding="0" border="0" className="htable">
                         <colgroup>
+                            {showOrder && <col style={{ width: '80px' }} />}
                             {
                                 columns.map((item, i) =>
                                     <col width={item.width || defaultWidth} key={i} style={{ width: item.width || defaultWidth }} />
                                 )
                             }
-                            {dosign && <col style={{ width: '160px' }} />}
+                            {showDo && <col style={{ width: '160px' }} />}
                         </colgroup>
                         <thead className="thead">
                             <tr className="rhead">
+                                {showOrder && <th className="thtitle" colSpan='1' rowSpan='1'>
+                                    <div className="htitle" style={{ textAlign: align }}>序号</div>
+                                </th>}
                                 {
                                     columns.map((item, i) =>
                                         <th className="thtitle" colSpan='1' rowSpan='1' key={item.prop}>
                                             <div className="htitle" style={{ textAlign: align }}>{item.label}</div>
                                         </th>)
                                 }
-                                {dosign && <th className="thtitle" colSpan='1' rowSpan='1'>
+                                {showDo && <th className="thtitle" colSpan='1' rowSpan='1'>
                                     <div className="htitle" style={{ textAlign: align }}>操作</div>
                                 </th>}
                             </tr>
@@ -68,26 +72,30 @@ export default class Table extends React.Component {
                 <div className="tableContent">
                     <table cellSpacing="0" cellPadding="0" border="0" className="ctable">
                         <colgroup>
+                            {showOrder && <col style={{ width: '80px' }} />}
                             {
                                 columns.map((item, i) =>
                                     <col width={item.width || defaultWidth} key={i} style={{ width: item.width || defaultWidth }} />
                                 )
                             }
-                            {dosign && <col style={{ width: '160px' }} />}
+                            {showDo && <col style={{ width: '160px' }} />}
                         </colgroup>
                         <tbody>
                             {
                                 datas.map((items, index) => <tr key={index} className="ctr">
+                                    {showOrder && <td className="thtitle">
+                                        <div className="htitle" style={{ textAlign: align }}>{index + 1}</div>
+                                    </td>}
                                     {
-                                        Object.keys(items).map((idx, isd) =>
-                                            <td className="thtitle" key={idx}>
-                                                <div className="htitle" style={{ textAlign: align }} title={items[idx]}>{items[idx]}</div>
+                                        columns.map((propItem, isd) =>
+                                            <td className="thtitle" key={propItem.prop}>
+                                                <div className="htitle" style={{ textAlign: align }} title={items[propItem.prop]}>{items[propItem.prop]}</div>
                                             </td>)
                                     }
-                                    {dosign && <td className="thtitle">
+                                    {showDo && <td className="thtitle">
                                         <div className="htitles">
                                             <button className="edit" onClick={this.edit.bind(this)}>编辑</button>
-                                            <button className="delete" onClick={this.del.bind(this)}>删除</button>
+                                            <button className="delete" onClick={this.del.bind(this, items)}>删除</button>
                                         </div>
                                     </td>}
                                 </tr>)

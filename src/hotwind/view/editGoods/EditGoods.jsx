@@ -116,13 +116,21 @@ export default class EditGoods extends React.Component {
         this.getGoods();
     }
 
-    delTable = () => {
-        console.log('删除')
+    /**
+     * Note: 删除指定商品
+     * @id{商品id}
+     */
+    delTable = (option) => {
+        let param = { id: option.id, barcode: option.barcode }
+        $http.delete('delGoods', param).then(res => {
+            console.log(res)
+        })
     }
     editTable = () => {
         console.log('编辑')
     }
     render() {
+        console.log(this.state.list)
         return (
             <div className="editGoods">
                 <div className="editTable">

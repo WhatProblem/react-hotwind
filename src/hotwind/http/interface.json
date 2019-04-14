@@ -18,5 +18,10 @@
         "wsUrl": "/getGoods",
         "param": "pages, offsets, barcode",
         "content": "商品列表"
+    },
+    "delGoods": {
+        "wsUrl": "/delGoods",
+        "param": "id",
+        "content": "删除商品"
     }
 }
