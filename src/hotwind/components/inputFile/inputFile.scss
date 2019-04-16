@@ -5,6 +5,8 @@
     border: 1px solid $inputBorderColor;
     border-radius: 4px;
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    float: left;
+    margin: 10px 20px;
 
     &:hover {
         border-color: $inputHoverColor;

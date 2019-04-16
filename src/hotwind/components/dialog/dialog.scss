@@ -1,0 +1,186 @@
+@import '../../../styles/common.scss';
+
+.dialog {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999999;
+    animation-name: bgShow;
+    animation-duration: 0.2s;
+
+    .content {
+        height: auto;
+        position: relative;
+        margin: 0 auto 50px;
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+        box-sizing: border-box;
+        margin-top: 15vh;
+        // animation: name duration timing-function delay iteration-count direction fill-mode;
+        animation-name: dialogShow;
+        animation-duration: 0.25s;
+        animation-timing-function: ease;
+
+        .dialogTitle {
+            padding: 15px;
+            padding-bottom: 10px;
+            position: relative;
+
+            .titleName {
+                width: 100%;
+                height: 24px;
+                line-height: 24px;
+                font-size: 18px;
+            }
+
+            .closeDialog {
+                font-style: normal;
+                display: block;
+                width: 18px;
+                height: 18px;
+                color: #909399;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                z-index: 2020;
+                transform: scale(1.5, 1);
+                cursor: pointer;
+            }
+        }
+
+        .dialogContainer {
+            padding: 30px 20px;
+
+            .dialogChild {
+                width: 100%;
+            }
+
+            &::after {
+                display: block;
+                content: '';
+                clear: both;
+            }
+        }
+
+        .dialogFoot {
+            padding: 10px 15px 15px;
+
+            .dialogBtn {
+                width: 100%;
+                height: 38px;
+
+                .dialogConfirm {
+                    float: right;
+                    width: 72px;
+                    height: 38px;
+                    color: #fff;
+                    background: #409eff;
+                    border: 1px solid #dcdfe6;
+                    border-color: #409eff;
+                    transition: all 0.1s;
+                    text-align: center;
+                    line-height: 38px;
+                    border-radius: 4px;
+                    font-size: 14px;
+
+                    &:hover {
+                        cursor: pointer;
+                        background: #6db0f3;
+                    }
+                }
+
+                .dialogCancel {
+                    float: right;
+                    width: 72px;
+                    height: 38px;
+                    color: #606266;
+                    background: #fff;
+                    border: 1px solid #dcdfe6;
+                    border-color: #dcdfe6;
+                    transition: all 0.1s;
+                    text-align: center;
+                    line-height: 38px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    margin-right: 20px;
+
+                    &:hover {
+                        cursor: pointer;
+                        color: #449cf5;
+                    }
+                }
+            }
+        }
+    }
+
+    .hideContent {
+        height: auto;
+        position: relative;
+        margin: 0 auto 50px;
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+        box-sizing: border-box;
+        margin-top: 15vh;
+        animation-name: dialogHide;
+        animation-duration: 0.2s;
+        animation-timing-function: ease-out;
+    }
+}
+
+.hideDialog {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999999;
+    display: none;
+    animation-name: bgHide;
+    animation-duration: 0.2s;
+}
+
+@keyframes bgShow {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes bgHide {
+    0% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes dialogShow {
+    0% {
+        margin-top: -100%;
+    }
+
+    100% {
+        margin-top: 15vh;
+    }
+}
+
+@keyframes dialogHide {
+    0% {
+        margin-top: 15vh;
+    }
+
+    100% {
+        margin-top: -100%;
+    }
+}

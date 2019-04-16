@@ -23,9 +23,9 @@ export default class Table extends React.Component {
             this.props.onDel(items)
         }
     }
-    edit = () => {
+    edit = (items) => {
         if (this.props.onEdit) {
-            this.props.onEdit()
+            this.props.onEdit(items)
         }
     }
     render() {
@@ -94,7 +94,7 @@ export default class Table extends React.Component {
                                     }
                                     {showDo && <td className="thtitle">
                                         <div className="htitles">
-                                            <button className="edit" onClick={this.edit.bind(this)}>编辑</button>
+                                            <button className="edit" onClick={this.edit.bind(this, items)}>编辑</button>
                                             <button className="delete" onClick={this.del.bind(this, items)}>删除</button>
                                         </div>
                                     </td>}

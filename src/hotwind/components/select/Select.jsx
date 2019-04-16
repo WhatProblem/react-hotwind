@@ -24,12 +24,13 @@ export default class Select extends React.Component {
     }
     render() {
         const { options = [], width = 240, placeholder = '请选择内容', value = '', name } = this.props
+        console.log(value)
         return (
             <div style={{ width: width }} className="select">
                 <div className="inputSelect" onClick={this.showOptions.bind(this, 123)}>
                     <input style={{ width: width }} placeholder={placeholder} value={value} disabled className="selectInput" type="text" />
                 </div>
-                <i className={`arrow r-hotwind h-arrow_down ${this.state.show ? 'showOption' : 'hideOption'}`}></i>
+                <i className={`arrow r-hotwind h-arrow_down ${this.state.show ? 'showOption' : 'hideOption'}`} onClick={this.showOptions.bind(this, 123)}></i>
                 {!!options.length && this.state.show && <div className="options">
                     {
                         options.map((option, i) => <div className="option" onClick={this.selectOption.bind(this, option)} key={i}>{option[name]}</div>)
