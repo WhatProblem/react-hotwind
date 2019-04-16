@@ -24,7 +24,6 @@ export default class Select extends React.Component {
     }
     render() {
         const { options = [], width = 240, placeholder = '请选择内容', value = '', name } = this.props
-        console.log(value)
         return (
             <div style={{ width: width }} className="select">
                 <div className="inputSelect" onClick={this.showOptions.bind(this, 123)}>

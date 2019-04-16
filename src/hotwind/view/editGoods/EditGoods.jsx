@@ -70,6 +70,7 @@ export default class EditGoods extends React.Component {
             sexOption: {}, // 性别
             categoryOption: {}, // 选择商品类型
             goodsOption: null, // 商品类型
+            goodsName: '', // 商品名称
         }
     }
     /**
@@ -148,6 +149,7 @@ export default class EditGoods extends React.Component {
     * Note: 需要编辑的数据
     */
     editTable = (option) => {
+        console.log(option)
         let editOtion = null
         for (let opt of this.state.goodsList) {
             if (opt.id === option.id) {
@@ -157,11 +159,10 @@ export default class EditGoods extends React.Component {
         }
         this.setState({
             show: true,
-            sexOption: { type_id: editOtion.type_id, name: editOtion.type_id ? '男' : '女' }
+            sexOption: { type_id: editOtion.type_id, name: editOtion.type_id == '1' ? '男' : '女' },
+            goodsName: editOtion.goods_name
         })
         if (editOtion.type_id == 0) {
-            console.log(option)
-            console.log(editOtion)
             this.setState({
                 categoryOption: { category_type: editOtion.category_type, name: this.state.resConfig.category[0]['list'][editOtion.category_type]['name'] },
                 goodsOption: this.state.resConfig.category[0]
@@ -180,10 +181,36 @@ export default class EditGoods extends React.Component {
         })
     }
     closeDialog = (opt) => {
-        console.log(opt)
         this.setState({
             show: false
         })
+    }
+    change = (inputState, value) => {
+        if (inputState === 'goodsName') {
+            this.setState({
+                goodsName: value
+            })
+        } else if (inputState === 'goodsPrice') {
+            this.setState({
+                goodsPrice: value
+            })
+        } else if (inputState === 'goodsColor') {
+            this.setState({
+                goodsColor: value
+            })
+        } else if (inputState === 'goodsDiscount') {
+            this.setState({
+                goodsDiscount: value
+            })
+        } else if (inputState === 'saleInfoVal') {
+            this.setState({
+                saleInfoVal: value
+            })
+        } else if (inputState === 'upload') {
+            this.setState({
+                inputFile: value
+            })
+        }
     }
     select = (optionState, opt) => {
         if (optionState === 'sex') {
@@ -230,7 +257,6 @@ export default class EditGoods extends React.Component {
         }
     }
     render() {
-        console.log(this.state.categoryOption)
         return (
             <div className="editGoods">
                 <div className="editTable">
@@ -239,7 +265,7 @@ export default class EditGoods extends React.Component {
                 <Dialog visible={this.state.show} width={880} onConfirm={this.confirm.bind(this)} onCancel={this.closeDialog.bind(this)}>
                     {this.state.resConfig && <Select options={this.state.resConfig.male_type} width={240} name={'name'} placeholder={'请选择性别'} onClick={this.select.bind(this, 'sex')} value={this.state.sexOption.name} />}
                     {this.state.resConfig && this.state.show && <Select options={this.state.goodsOption.list} width={240} name={'name'} placeholder={'请选择商品类型'} onClick={this.select.bind(this, 'category')} value={this.state.categoryOption.name} />}
-                    <Input />
+                    <Input width={240} placeholder={'请输入商品名称'} onChange={this.change.bind(this, 'goodsName')} value={this.state.goodsName} type={'text'} disabled={false} />
                     <Input />
                     <Input />
                     <Input />
