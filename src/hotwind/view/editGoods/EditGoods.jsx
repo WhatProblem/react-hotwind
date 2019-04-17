@@ -71,6 +71,17 @@ export default class EditGoods extends React.Component {
             categoryOption: {}, // 选择商品类型
             goodsOption: null, // 商品类型
             goodsName: '', // 商品名称
+            goodsPrice: '', // 商品价格
+            goodsColor: '', // 商品颜色
+            goodsDiscount: '', // 商品折扣
+            saleInfo: {}, // 促销类型
+            saleInfoName: '', // 促销类型名称--placeholder部分
+            saleInfoVal: '', // 促销类型名称
+            inputPermit: false, // 不允许输入促销类型名称
+            isNewOption: {}, // 是否是新品
+            onsaleFlag: {}, // 活动标识
+            inputFile: '', // 输入文件
+            goodsId: '', // 商品id
         }
     }
     /**
@@ -144,12 +155,10 @@ export default class EditGoods extends React.Component {
             console.log(res)
         })
     }
-
     /**
-    * Note: 需要编辑的数据
-    */
+* Note: 需要编辑的数据
+*/
     editTable = (option) => {
-        console.log(option)
         let editOtion = null
         for (let opt of this.state.goodsList) {
             if (opt.id === option.id) {
@@ -157,10 +166,20 @@ export default class EditGoods extends React.Component {
                 break
             }
         }
+        console.log(option)
+        console.log(editOtion)
         this.setState({
             show: true,
+            goodsId: Number(option.id),
             sexOption: { type_id: editOtion.type_id, name: editOtion.type_id == '1' ? '男' : '女' },
-            goodsName: editOtion.goods_name
+            goodsName: editOtion.goods_name,
+            goodsPrice: Number(editOtion.goods_price),
+            goodsColor: editOtion.goods_color,
+            goodsDiscount: Number(editOtion.goods_discount),
+            saleInfo: { onsale_info: Number(editOtion.onsale_info), name: this.state.resConfig.sale_info[Number(editOtion.onsale_info)]['name'] },
+            isNewOption: { isnew: editOtion.isnew == 0 ? 0 : 1, name: editOtion.isnew == 0 ? '否' : '新品' },
+            onsaleFlag: { sale_type: Number(editOtion.sale_type), name: option.sale_type },
+            inputFile: { name: option.picurl },
         })
         if (editOtion.type_id == 0) {
             this.setState({
@@ -173,12 +192,50 @@ export default class EditGoods extends React.Component {
                 goodsOption: this.state.resConfig.category[1]
             })
         }
+        // 促销消息字段
+        if (editOtion.onsale_info == 0) { // 无促销
+            this.setState({
+                saleInfoVal: '',
+                inputPermit: false,
+            })
+        } else if (editOtion.onsale_info == 1) {
+            this.setState({
+                saleInfoVal: editOtion.cut_now,
+                inputPermit: true,
+            })
+        } else if (editOtion.onsale_info == 2) {
+            this.setState({
+                saleInfoVal: editOtion.mail_free,
+                inputPermit: true,
+            })
+        } else if (editOtion.onsale_info == 3) {
+            this.setState({
+                saleInfoVal: editOtion.mail_free,
+                inputPermit: true,
+            })
+        }
     }
-
     confirm = (opt) => {
-        this.setState({
-            show: false
+        let param = {
+            id: this.state.goodsId,
+            type_id: this.state.sexOption.type_id,
+            category_type: this.state.categoryOption.category_type,
+            goods_name: this.state.goodsName,
+            goods_price: this.state.goodsPrice,
+            goods_color: this.state.goodsColor,
+            goods_discount: this.state.goodsDiscount,
+            onsale_info: this.state.saleInfo.onsale_info,
+            onsale_infoVal: this.state.saleInfoVal,
+            isnew: this.state.isNewOption.isnew,
+            sale_type: this.state.onsaleFlag.sale_type,
+        }
+        console.log(param)
+        $http.put('editGoods', param).then(res => {
+            console.log(res)
         })
+        // this.setState({
+        // show: false
+        // })
     }
     closeDialog = (opt) => {
         this.setState({
@@ -266,14 +323,13 @@ export default class EditGoods extends React.Component {
                     {this.state.resConfig && <Select options={this.state.resConfig.male_type} width={240} name={'name'} placeholder={'请选择性别'} onClick={this.select.bind(this, 'sex')} value={this.state.sexOption.name} />}
                     {this.state.resConfig && this.state.show && <Select options={this.state.goodsOption.list} width={240} name={'name'} placeholder={'请选择商品类型'} onClick={this.select.bind(this, 'category')} value={this.state.categoryOption.name} />}
                     <Input width={240} placeholder={'请输入商品名称'} onChange={this.change.bind(this, 'goodsName')} value={this.state.goodsName} type={'text'} disabled={false} />
-                    <Input />
-                    <Input />
-                    <Input />
-                    <Select />
-                    <Input />
-                    <Select />
-                    <Select />
-                    <InputFile />
+                    <Input width={240} placeholder={'请输入商品价格'} onChange={this.change.bind(this, 'goodsPrice')} value={this.state.goodsPrice} type={'number'} disabled={false} />
+                    <Input width={240} placeholder={'请输入商品颜色'} onChange={this.change.bind(this, 'goodsColor')} value={this.state.goodsColor} type={'text'} disabled={false} />
+                    <Input width={240} placeholder={'请输入优惠折扣金额'} onChange={this.change.bind(this, 'goodsDiscount')} value={this.state.goodsDiscount} type={'number'} disabled={false} />
+                    {this.state.resConfig && <Select options={this.state.resConfig.sale_info} width={240} name={'name'} placeholder={'请选择促销类型'} onClick={this.select.bind(this, 'saleInfo')} value={this.state.saleInfo.name} />}
+                    <Input width={240} placeholder={this.state.saleInfoName || '未选择促销类型'} onChange={this.change.bind(this, 'saleInfoVal')} value={this.state.saleInfoVal} type={'text'} disabled={!this.state.inputPermit} />
+                    {this.state.resConfig && <Select options={this.state.resConfig.new_product} width={240} name={'name'} placeholder={'请选择是否是新品'} onClick={this.select.bind(this, 'isNewOption')} value={this.state.isNewOption.name} />}
+                    {this.state.resConfig && <Select options={this.state.resConfig.sale_ornot} width={240} name={'name'} placeholder={'请选择活动类型标识'} onClick={this.select.bind(this, 'onsaleFlag')} value={this.state.onsaleFlag.name} />}
                 </Dialog>
             </div>
         )

@@ -13,7 +13,7 @@ export default class Dialog extends React.Component {
         this.setState({
             showState: false
         })
-        this.props.onConfirm({ data: 123 });
+        this.props.onCancel({ data: 123 });
     }
 
     confirmDialog = () => {

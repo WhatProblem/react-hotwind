@@ -23,5 +23,10 @@
         "wsUrl": "/delGoods",
         "param": "id",
         "content": "删除商品"
+    },
+    "editGoods": {
+        "wsUrl": "/editGoods",
+        "param": "id, type_id, category_type, goods_name, goods_price, goods_color, goods_discount, onsale_info, isnew, sale_type",
+        "content": "修改商品"
     }
 }
